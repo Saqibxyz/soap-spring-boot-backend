@@ -13,7 +13,7 @@ public class AerospikeConfig extends AbstractAerospikeDataConfiguration {
     @Override
     protected Collection<Host> getHosts() {
         // configure Aerospike cluster hosts
-        return Collections.singleton(new Host("localhost", 3000));
+        return Collections.singleton(new Host("127.0.0.1", 3000));
     }
 
     @Override
