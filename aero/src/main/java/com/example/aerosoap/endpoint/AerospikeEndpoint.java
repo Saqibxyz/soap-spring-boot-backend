@@ -1,5 +1,7 @@
 package com.example.aerosoap.endpoint;
 
+import com.example.aerosoap.dto.ReadRecordRequest;
+import com.example.aerosoap.dto.ReadRecordResponse;
 import com.example.aerosoap.service.AerospikeService;
 import com.example.aerospike.CreateRecordRequest;
 import com.example.aerospike.CreateRecordResponse;
@@ -27,4 +29,31 @@ public class AerospikeEndpoint {
         response.setStatus(status);
         return response;
     }
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "readRecordRequest")
+    @ResponsePayload
+    public ReadRecordResponse read(@RequestPayload ReadRecordRequest request) {
+        String value = service.readRecord(request.getKey());
+        ReadRecordResponse response = new ReadRecordResponse();
+        response.setValue(value);
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "updateRecordRequest")
+    @ResponsePayload
+    public UpdateRecordResponse update(@RequestPayload UpdateRecordRequest request) {
+        String status = service.updateRecord(request.getKey(), request.getBinName(), request.getValue());
+        UpdateRecordResponse response = new UpdateRecordResponse();
+        response.setStatus(status);
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "deleteRecordRequest")
+    @ResponsePayload
+    public DeleteRecordResponse delete(@RequestPayload DeleteRecordRequest request) {
+        boolean success = service.deleteRecord(request.getKey());
+        DeleteRecordResponse response = new DeleteRecordResponse();
+        response.setSuccess(success);
+        return response;
+    }
+
 }
