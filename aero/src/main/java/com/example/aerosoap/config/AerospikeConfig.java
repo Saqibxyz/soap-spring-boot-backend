@@ -3,10 +3,11 @@ package com.example.aerosoap.config;
 import com.aerospike.client.Host;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.aerospike.config.AbstractAerospikeDataConfiguration;
+import org.springframework.ws.config.annotation.EnableWs;
 
 import java.util.Collection;
 import java.util.Collections;
-
+@EnableWs
 @Configuration
 public class AerospikeConfig extends AbstractAerospikeDataConfiguration {
 
